@@ -6,6 +6,7 @@
   "author": "mingtianyihou33 <liumingyi1428@126.com>",
   "license": "MIT",
   "scripts": {
+    "start": "concurrently \"npm run dev:server\" \"npm run dev:client\" \"npm run dev:start\" ",
     "dev:server": "webpack --config webpack.server.js --watch",
     "dev:client": "webpack --config webpack.client.js --watch",
     "dev:start": "nodemon dist/bundle.js"
