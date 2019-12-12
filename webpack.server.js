@@ -3,6 +3,7 @@ const path = require('path')
 module.exports = {
     target: 'node',
     mode: 'development',
+    devtool: 'source-map',
     entry: './server/index.js',
     output: {
         filename: "bundle.js",

@@ -1,12 +1,17 @@
 import React, {useState} from 'react'
+import {Route} from 'react-router-dom'
+import Home from './view/Home'
+import About from './view/About'
 
 function App(props) {
-    const [count, setCount] = useState(1)
     return (
         <div>
-            <h1>hello, {props.title}</h1>
-            <div>{count}</div>
-            <button onClick={() => setCount(count + 1)}>add</button>
+            <Route path="/" exact>
+                <Home title={props.title}/>
+            </Route>
+            <Route path="/about" exact>
+                <About/>
+            </Route>
         </div>
     )
 }
