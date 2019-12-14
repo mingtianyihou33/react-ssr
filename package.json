@@ -6,12 +6,14 @@
   "author": "mingtianyihou33 <liumingyi1428@126.com>",
   "license": "MIT",
   "scripts": {
-    "start": "concurrently \"npm run dev:server\" \"npm run dev:client\" \"npm run dev:start\" ",
+    "start": "concurrently \"npm run dev:mock\" \"npm run dev:server\" \"npm run dev:client\" \"npm run dev:start\" ",
     "dev:server": "webpack --config webpack.server.js --watch",
     "dev:client": "webpack --config webpack.client.js --watch",
-    "dev:start": "nodemon dist/bundle.js"
+    "dev:start": "nodemon dist/bundle.js",
+    "dev:mock": "nodemon mock/index.js"
   },
   "dependencies": {
+    "@babel/runtime": "^7.7.6",
     "axios": "^0.19.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -22,6 +24,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.7.5",
+    "@babel/plugin-transform-runtime": "^7.7.6",
     "@babel/preset-env": "^7.7.6",
     "@babel/preset-react": "^7.7.4",
     "babel-loader": "^8.0.6",

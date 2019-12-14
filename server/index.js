@@ -22,30 +22,38 @@ var proxyOption = {
 };
 app.get('/api/*', proxyMiddleWare(proxyOption))
 
-app.get('*', (req, res) => {
+app.get('*', async (req, res) => {
     const promises = []
-    routes.some(route => {
+    routes.forEach(route => {
         const match = matchPath(req.path, route)
         if (match && route.component.loadData) {
+            console.log('route')
+            console.log(route)
             promises.push(route.component.loadData(store))
         }
         return match
     })
-    Promise.all(promises).then(() => {
-        console.log('store.getState()')
-        console.log(store.getState())
+    for (let i = 0; i < promises.length; i++) {
+        try {
+            await promises[i]
+        } catch (e) {
 
-        const content = renderToString(
-            <Provider store={store}>
-                <StaticRouter location={req.url}>
-                    <App title='app'>
-                        {routes.map(route => <Route {...route}></Route>)}
-                    </App>
-                </StaticRouter>
-            </Provider>
-        )
-        res.send(
-            `
+        }
+    }
+    console.log('store.getState()')
+    console.log(store.getState())
+
+    const content = renderToString(
+        <Provider store={store}>
+            <StaticRouter location={req.url}>
+                <App title='app'>
+                    {routes.map(route => <Route {...route}></Route>)}
+                </App>
+            </StaticRouter>
+        </Provider>
+    )
+    res.send(
+        `
             <html>
                 <head>
                     <meta charset="utf-8">
@@ -55,12 +63,11 @@ app.get('*', (req, res) => {
                     <script>
                         window.__context=${JSON.stringify(store.getState())}
                     </script>
-                    <script src="bundle.js"></script>
+                    <script src="/bundle.js"></script>
                 </body>
             </html>
         `
-        )
-    })
+    )
 })
 
 
