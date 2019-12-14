@@ -5,6 +5,13 @@ import {userReducer} from './user'
 const reducer = combineReducers({
     user: userReducer
 })
-const store = createStore(reducer, applyMiddleware(thunk))
+// const store = createStore(reducer, applyMiddleware(thunk))
 
-export default store
+export const getClientStore = () => {
+    let defaultState = window.__context ? window.__context : {}
+    return createStore(reducer, defaultState, applyMiddleware(thunk))
+}
+
+export const getServerStore = () => {
+    return createStore(reducer, applyMiddleware(thunk))
+}

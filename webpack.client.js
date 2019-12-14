@@ -1,22 +1,12 @@
 const path = require('path')
-module.exports = {
-    mode: 'development',
-    entry: './client/index.js',
-    devtool: 'source-map',
-    output: {
-        filename: "bundle.js",
-        path: path.resolve(__dirname, 'public'),
-    },
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/,
-                options: {
-                    presets: ['@babel/preset-react', '@babel/preset-env']
-                }
-            }
-        ]
+const merge = require('webpack-merge')
+const webpackBase = require('./webpack.base')
+module.exports = merge(webpackBase,
+    {
+        entry: './client/index.js',
+        output: {
+            filename: "bundle.js",
+            path: path.resolve(__dirname, 'public'),
+        }
     }
-}
+)

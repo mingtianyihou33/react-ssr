@@ -1,12 +1,10 @@
-import axios from "axios";
+import axios from "../plugin/axios";
 
 export function getUsers() {
     return (dispatch) => {
-        axios.get('/api/user/list').then(res => {
-            res = res.data
-            if (res.code === 200) {
-                dispatch({type: 'push', data: res.data})
-            }
+        return axios.get('/api/user/list').then(res => {
+            console.log(res)
+            dispatch({type: 'push', data: res})
         })
     }
 }
