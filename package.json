@@ -9,7 +9,7 @@
     "start": "concurrently \"npm run dev:mock\" \"npm run dev:server\" \"npm run dev:client\" \"npm run dev:start\" ",
     "dev:server": "webpack --config webpack.server.js --watch",
     "dev:client": "webpack --config webpack.client.js --watch",
-    "dev:start": "nodemon dist/bundle.js",
+    "dev:start": "nodemon dist/server.js",
     "dev:mock": "nodemon mock/index.js"
   },
   "dependencies": {
@@ -32,6 +32,7 @@
     "css-loader": "^3.3.2",
     "express": "^4.17.1",
     "http-proxy-middleware": "^0.20.0",
+    "isomorphic-style-loader": "^5.1.0",
     "koa": "^2.11.0",
     "koa-body": "^4.1.1",
     "koa-static": "^5.0.0",

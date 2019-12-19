@@ -29,4 +29,15 @@
 ### 6. 一个后台服务，将接口请求通过服务端代理，解决跨域问题
 - 在服务端添加接口拦截指定url前缀的请求，然后代理到目标服务器
 ***
-
+### 7. css支持
+- 在服务端webpack配置添加css-loader
+- 在客户端webpack配置添加style-loader和css-loader
+- 客户端打包后生成的js文件将会执行将css添加到style标签内
+- isomorphic-style-loader可以不用添加
+***
+### 8. css支持
+- 在服务端webpack配置添加css-loader
+- 在客户端webpack配置添加style-loader和css-loader
+- 客户端打包后生成的js文件将会执行将css添加到style标签内
+- isomorphic-style-loader可以不用添加
+***
