@@ -16,8 +16,14 @@ module.exports = merge(webpackBase,
         {
           test: /\.css$/,
           use: [
-            // 'isomorphic-style-loader',
-            'css-loader'
+            'isomorphic-style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                localsConvention: 'camelCase'
+              }
+            }
           ]
         }
       ]

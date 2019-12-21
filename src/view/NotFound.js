@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 
-function Status ({ code, children }) {
+function Status ({ code, children, ...res }) {
   return (
     <Route render={({ staticContext }) => {
       if (staticContext) staticContext.code = code

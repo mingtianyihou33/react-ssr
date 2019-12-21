@@ -1,3 +1,5 @@
+import path from 'path'
+import fs from 'fs'
 import express from 'express'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
@@ -22,13 +24,22 @@ var proxyOption = {
 }
 app.get('/api/*', proxyMiddleWare(proxyOption))
 
+function csrRender (res) {
+  const filename = path.resolve(process.cwd(), 'public/index.csr.html')
+  const html = fs.readFileSync(filename, 'utf-8')
+  res.send(html)
+  res.end()
+}
+
 app.get('*', async (req, res) => {
+  if (req.query._mode === 'csr') {
+    console.log('csr 渲染')
+    return csrRender(res)
+  }
   const promises = []
   routes.forEach(route => {
     const match = matchPath(req.path, route)
     if (match && route.component.loadData) {
-      console.log('route')
-      console.log(route)
       promises.push(route.component.loadData(store))
     }
     return match
@@ -42,7 +53,7 @@ app.get('*', async (req, res) => {
   }
   console.log('store.getState()')
   console.log(store.getState())
-  const context = {}
+  const context = { css: [] }
   const content = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.url} context={context}>
@@ -68,6 +79,9 @@ app.get('*', async (req, res) => {
             <html>
                 <head>
                     <meta charset="utf-8">
+                    <style>
+                      ${context.css.join('/n')}
+                    </style>
                 </head>
                 <body>
                     <div id="root">${content}</div>

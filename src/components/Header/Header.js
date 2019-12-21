@@ -9,11 +9,11 @@ export default function Header () {
       {
         routes.map(
           item => {
-            return item.title ? <Link className='styleLink' to={item.path} key={item.key}>{item.title}</Link> : ''
+            return item.title ? <Link className='link' to={item.path} key={item.key}>{item.title}</Link> : ''
           }
         )
       }
-      <Link className='styleLink' to='/xxx'>不存在</Link>
+      <Link className='link' to='/xxx'>不存在</Link>
     </div>
   )
 }

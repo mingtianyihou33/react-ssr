@@ -1,0 +1,13 @@
+.list {
+    border: 1px solid gray;
+    list-style: none;
+}
+
+.list-item {
+    border-bottom: 1px solid gray;
+    color: #fff812;
+}
+
+.list-item:last-of-type {
+    border-bottom: none;
+}

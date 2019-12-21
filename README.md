@@ -41,3 +41,22 @@
 - 客户端打包后生成的js文件将会执行将css添加到style标签内
 - isomorphic-style-loader可以不用添加
 ***
+### 9. 404页面
+- 在服务端StaticRouter中添加context
+- 添加一个默认匹配路由NotFound
+- 在NotFound中添加Status，Status中包含Router组件，并render函数中获取staticContext,在服务端渲染时staticContext将会有值，
+  给staticContext设置code值
+- 在服务端接口输出部分通过判断context的code值，然后返回相应的状态码和404界面
+### 10. 服务端重定向
+- 添加重定向页面，并在里面添加Redirect组件
+- 在服务端接口输出部分可以通过context.action === 'REPLACE'来判断是否是重定向，如果是则直接返回301状态码和要跳到的地址
+### 11. 从ssr降级到csr
+- 添加html-webpack-plugin到客服端webpack的plugins中，然后添加html模版
+- 在服务端通过参数或者内容使用情况，如果符合条件，则直接返回为csr内容，不进行服务端渲染
+- 在客户端判断是ssr还是csr决定使用hydrate还是render
+### 12. css模块
+- 将客户端和服务端的css-loader配置module设置为true
+- 服务端添加isomorphic-style-loader，该loader将为style模块添加_getCss等方法，可以通过将_getCss获取到的css添加到context中，最后将css部分插入到html的style标签中
+- 服务端在context中添加css属性，方便路由组件设置css到上下文中
+### 13. css使用高阶组件优化
+- 添加WithStyle组件,WithStyle组件用于包裹其他要引入样式的组件，方便push css到context上
