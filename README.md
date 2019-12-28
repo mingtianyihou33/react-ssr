@@ -60,3 +60,6 @@
 - 服务端在context中添加css属性，方便路由组件设置css到上下文中
 ### 13. css使用高阶组件优化
 - 添加WithStyle组件,WithStyle组件用于包裹其他要引入样式的组件，方便push css到context上
+### 14. 使用WithStyle后服务端没有渲染列表数据问题
+- 原因：经过过WithStyle包装后，返回的组件丢失了loadData方法
+- 解决办法：WithStyle返回的结果要返回之前组件的静态方法，可借助hoist-non-react-statics拷贝所有非react的静态方法

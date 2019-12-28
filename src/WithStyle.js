@@ -1,8 +1,8 @@
 import React from 'react'
-import styles from './view/Home.css'
+import hoistNonReactStatic from 'hoist-non-react-statics'
 
 export default function WithStyle (Com, styles) {
-  return function (props) {
+  function NewComp (props) {
     if (props.staticContext) {
       props.staticContext.css.push(styles._getCss())
     }
@@ -10,4 +10,7 @@ export default function WithStyle (Com, styles) {
       <Com {...props}></Com>
     )
   }
+
+  hoistNonReactStatic(NewComp, Com)
+  return NewComp
 }
