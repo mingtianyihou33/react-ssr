@@ -28,11 +28,11 @@ function csrRender (res) {
   const filename = path.resolve(process.cwd(), 'public/index.csr.html')
   const html = fs.readFileSync(filename, 'utf-8')
   res.send(html)
-  res.end()
 }
 
+const mode = 'csr'
 app.get('*', async (req, res) => {
-  if (req.query._mode === 'csr') {
+  if (req.query._mode === 'csr' || mode === 'csr') {
     console.log('csr 渲染')
     return csrRender(res)
   }
@@ -97,5 +97,5 @@ app.get('*', async (req, res) => {
 })
 
 app.listen(3000, () => {
-  console.log('http://localhost:3000/')
+  console.log('server start at: ', 'http://localhost:3000/')
 })

@@ -63,3 +63,7 @@
 ### 14. 使用WithStyle后服务端没有渲染列表数据问题
 - 原因：经过过WithStyle包装后，返回的组件丢失了loadData方法
 - 解决办法：WithStyle返回的结果要返回之前组件的静态方法，可借助hoist-non-react-statics拷贝所有非react的静态方法
+### 15. 其他ssr实现方式
+- puppeteer，抓取渲染之后的页面
+- prerender
+- prerender-spa-plugin
